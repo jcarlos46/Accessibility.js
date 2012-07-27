@@ -34,7 +34,8 @@ var Accessibility = {
 
 	},
 	createCookies: function() {
-		Cookie.write('constrast','0');
+		if(Cookie.read('contrast') == null)
+			Cookie.write('contrast','0');
 		this.elements.each(function(el){
 			Cookie.write(el.id, el.getStyle('font-size'));
 		});

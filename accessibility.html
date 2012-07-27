@@ -1,0 +1,54 @@
+<script type="text/javascript" src="mootools-core-1.4.5-full-nocompat-yc.js"></script>
+<script type="text/javascript">
+var Accessibility = {
+	resizePlus: function() {
+		this.elements.each(function(el){
+			var newSize = el.getStyle(('font-size')).toInt() + 1;
+			el.setStyle('font-size', newSize + 'px');
+		});
+	},
+	resizeLess: function() {
+		this.elements.each(function(el){
+			var newSize = el.getStyle(('font-size')).toInt() - 1;
+			el.setStyle('font-size', newSize + 'px');
+		});
+	},
+	contrast: function() {
+	},
+	execute: function(arg) {
+		var that = this;
+		window.addEvent('domready', function() {
+			that.elements = $$(arg.elements.join(','));
+			document.id(arg.resizePlus).addEvent('click', function(){
+				that.resizePlus();
+			});
+			document.id(arg.resizeLess).addEvent('click', function(){
+				that.resizeLess();
+			});
+			document.id(arg.contrast).addEvent('click', function(){
+				that.contrast();
+			});
+			document.id(arg.resizePlus).addEvent('click')
+		});
+	}
+}
+</script>
+<script type="text/javascript">
+Accessibility.execute({
+	elements: ['conteudo','topo','rodape'],
+	resizePlus: '',
+	resizeLess: '',
+	contrast: '',
+});
+</script>
+<body>
+	<div id="topo">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus est ac metus egestas ullamcorper. Pellentesque luctus mi vel elit adipiscing sed imperdiet libero venenatis. In vitae urna et justo vestibulum vulputate. Cras risus magna, convallis vel fringilla congue, tristique vel velit. Praesent mollis interdum est, et malesuada turpis rutrum ut. Vivamus sed diam lectus. Integer magna nibh, scelerisque nec ornare vel, rutrum ultricies massa. Fusce sed iaculis magna. Cras non massa sit amet tortor accumsan lacinia. Proin nisi erat, sagittis nec bibendum et, viverra at quam. In hac habitasse platea dictumst. Integer ante erat, pharetra nec facilisis sed, feugiat et est. Aenean non tristique velit. Ut pretium tristique luctus. Aliquam egestas suscipit felis quis adipiscing.</p>
+	</div>
+	<div id="conteudo">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus est ac metus egestas ullamcorper. Pellentesque luctus mi vel elit adipiscing sed imperdiet libero venenatis. In vitae urna et justo vestibulum vulputate. Cras risus magna, convallis vel fringilla congue, tristique vel velit. Praesent mollis interdum est, et malesuada turpis rutrum ut. Vivamus sed diam lectus. Integer magna nibh, scelerisque nec ornare vel, rutrum ultricies massa. Fusce sed iaculis magna. Cras non massa sit amet tortor accumsan lacinia. Proin nisi erat, sagittis nec bibendum et, viverra at quam. In hac habitasse platea dictumst. Integer ante erat, pharetra nec facilisis sed, feugiat et est. Aenean non tristique velit. Ut pretium tristique luctus. Aliquam egestas suscipit felis quis adipiscing.</p>
+	</div>
+	<div id="rodape">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus est ac metus egestas ullamcorper. Pellentesque luctus mi vel elit adipiscing sed imperdiet libero venenatis. In vitae urna et justo vestibulum vulputate. Cras risus magna, convallis vel fringilla congue, tristique vel velit. Praesent mollis interdum est, et malesuada turpis rutrum ut. Vivamus sed diam lectus. Integer magna nibh, scelerisque nec ornare vel, rutrum ultricies massa. Fusce sed iaculis magna. Cras non massa sit amet tortor accumsan lacinia. Proin nisi erat, sagittis nec bibendum et, viverra at quam. In hac habitasse platea dictumst. Integer ante erat, pharetra nec facilisis sed, feugiat et est. Aenean non tristique velit. Ut pretium tristique luctus. Aliquam egestas suscipit felis quis adipiscing.</p>
+	</div>
+</body>

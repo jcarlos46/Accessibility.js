@@ -1,23 +1,24 @@
-var Accessibility = {
-	resizePlus: function() {
-		this.elements.each(function(el){
+var Accessibility = new function() {
+	var elements = [],
+	resizePlus = function() {
+		elements.each(function(el){
 			var newSize = el.getStyle(('font-size')).toInt() + 1;
 			el.setStyle('font-size', newSize + 'px');
 		});
 	},
-	resizeLess: function() {
-		this.elements.each(function(el){
+	resizeLess = function() {
+		elements.each(function(el){
 			var newSize = el.getStyle(('font-size')).toInt() - 1;
 			el.setStyle('font-size', newSize + 'px');
 		});
 	},
-	resizeNormal: function() {
-		this.elements.each(function(el){
+	resizeNormal = function() {
+		elements.each(function(el){
 			el.setStyle('font-size', Cookie.read(el.id));
 			Cookie.dispose(el.id);
 		});
 	},
-	contrast: function(contrastFile, event) {
+	contrast = function(contrastFile, event) {
 		if((Cookie.read('contrast') == '0' && event.type == 'click') || 
 			Cookie.read('contrast') == '1' && event.type == 'ready') {
 			document.getElement('head').adopt(new Element('link', {
@@ -33,32 +34,32 @@ var Accessibility = {
 		}
 
 	},
-	createCookies: function() {
+	createCookies = function() {
 		if(Cookie.read('contrast') == null)
 			Cookie.write('contrast','0');
-		this.elements.each(function(el){
+		elements.each(function(el){
 			Cookie.write(el.id, el.getStyle('font-size'));
 		});
-	},
-	execute: function(arg) {
-		var that = this;
+	};
+	
+	this.execute = function(arg) {
 		window.addEvent('domready', function() {
-			that.elements = $$(arg.elements.join(','));
-			that.createCookies();
-			that.contrast(arg.contrastFile, {type: 'ready'});
+			elements = $$(arg.elements.join(','));
+			createCookies();
+			contrast(arg.contrastFile, {type: 'ready'});
 
 			document.id(arg.resizePlus).addEvent('click', function(){
-				that.resizePlus();
+				resizePlus();
 			});
 			document.id(arg.resizeLess).addEvent('click', function(){
-				that.resizeLess();
+				resizeLess();
 			});
 			document.id(arg.resizeNormal).addEvent('click', function(){
-				that.resizeNormal();
+				resizeNormal();
 			});
 			document.id(arg.contrast).addEvent('click', function(e2){
-				that.contrast(arg.contrastFile, e2);
+				contrast(arg.contrastFile, e2);
 			});
 		});
-	}
+	};
 }
